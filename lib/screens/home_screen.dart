@@ -1,5 +1,6 @@
 import 'package:clubhouse_ui/data.dart';
 import 'package:clubhouse_ui/widgets/user_profile_image.dart';
+import 'package:clubhouse_ui/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
@@ -57,6 +58,12 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
           ),
+        ],
+      ),
+      body: ListView(
+        padding: EdgeInsets.fromLTRB(20, 20, 20, 120),
+        children: [
+          UpcomingRooms(upcomingRooms: upcomingRoomsList),
         ],
       ),
     );
