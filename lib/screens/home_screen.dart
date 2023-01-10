@@ -60,14 +60,91 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: ListView(
-        padding: EdgeInsets.fromLTRB(20, 20, 20, 120),
+      body: Stack(
+        alignment: Alignment.center,
         children: [
-          UpcomingRooms(upcomingRooms: upcomingRoomsList),
-          const SizedBox(
-            height: 12,
+          ListView(
+            padding: EdgeInsets.fromLTRB(20, 20, 20, 120),
+            children: [
+              UpcomingRooms(upcomingRooms: upcomingRoomsList),
+              const SizedBox(
+                height: 12,
+              ),
+              ...roomsList.map((e) => RoomCard(room: e))
+            ],
           ),
-          ...roomsList.map((e) => RoomCard(room: e))
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Container(
+              height: 100,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Theme.of(context).scaffoldBackgroundColor.withOpacity(0.1),
+                    Theme.of(context).scaffoldBackgroundColor,
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 50,
+            child: Container(
+              padding: EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                  color: Theme.of(context).accentColor,
+                  borderRadius: BorderRadius.circular(24)),
+              child: const Text.rich(
+                TextSpan(
+                  children: [
+                    WidgetSpan(
+                      child: Icon(
+                        CupertinoIcons.add,
+                        size: 21,
+                        color: Colors.white,
+                      ),
+                    ),
+                    TextSpan(
+                        text: ' Start a room',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500)),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+              bottom: 50,
+              right: 40,
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  IconButton(
+                    onPressed: () {},
+                    icon: const Icon(
+                      CupertinoIcons.circle_grid_3x3_fill,
+                      size: 28,
+                    ),
+                  ),
+                  Positioned(
+                    right: 4.6,
+                    bottom: 11.8,
+                    child: Container(
+                      height: 16,
+                      width: 16,
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Theme.of(context).accentColor),
+                    ),
+                  ),
+                ],
+              )),
         ],
       ),
     );
