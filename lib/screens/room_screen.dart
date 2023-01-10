@@ -47,6 +47,48 @@ class RoomScreen extends StatelessWidget {
           ),
         ],
       ),
+      body: Container(
+        padding: const EdgeInsets.all(20),
+        height: MediaQuery.of(context).size.height,
+        width: double.infinity,
+        decoration: BoxDecoration(
+            color: Colors.white, borderRadius: BorderRadius.circular(40)),
+        child: CustomScrollView(
+          slivers: [
+            SliverToBoxAdapter(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        '${room.club} 🏠'.toUpperCase(),
+                        style: Theme.of(context).textTheme.overline!.copyWith(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
+                            letterSpacing: 1),
+                      ),
+                      GestureDetector(
+                        onTap: () {},
+                        child: const Icon(CupertinoIcons.ellipsis),
+                      ),
+                    ],
+                  ),
+                  Text(
+                    room.name,
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText1!
+                        .copyWith(fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 }
