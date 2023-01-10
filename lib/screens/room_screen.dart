@@ -1,5 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:math';
+
 import 'package:clubhouse_ui/widgets/user_profile_image.dart';
+import 'package:clubhouse_ui/widgets/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:clubhouse_ui/data.dart';
@@ -85,7 +88,27 @@ class RoomScreen extends StatelessWidget {
                   ),
                 ],
               ),
-            )
+            ),
+            SliverPadding(
+              padding: EdgeInsets.all(20),
+              sliver: SliverGrid.count(
+                mainAxisSpacing: 20,
+                crossAxisCount: 3,
+                children: [
+                  ...room.speakers
+                      .map(
+                        (e) => RoomUserProfile(
+                          imageUrl: e.imageUrl,
+                          size: 66,
+                          name: e.givenName,
+                          isNew: Random().nextBool(),
+                          isMuted: Random().nextBool(),
+                        ),
+                      )
+                      .toList(),
+                ],
+              ),
+            ),
           ],
         ),
       ),
