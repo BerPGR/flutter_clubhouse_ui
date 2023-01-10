@@ -109,8 +109,141 @@ class RoomScreen extends StatelessWidget {
                 ],
               ),
             ),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.only(left: 20),
+                child: Text(
+                  'Followed by speakers',
+                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                      color: Colors.grey[400], fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+            SliverPadding(
+              padding: EdgeInsets.all(20),
+              sliver: SliverGrid.count(
+                mainAxisSpacing: 20,
+                crossAxisCount: 4,
+                childAspectRatio: 0.8,
+                children: [
+                  ...room.followedBySpeakers
+                      .map(
+                        (e) => RoomUserProfile(
+                          imageUrl: e.imageUrl,
+                          size: 66,
+                          name: e.givenName,
+                          isNew: Random().nextBool(),
+                        ),
+                      )
+                      .toList(),
+                ],
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.only(left: 20),
+                child: Text(
+                  'Other in room',
+                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                      color: Colors.grey[400], fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+            SliverPadding(
+              padding: EdgeInsets.all(20),
+              sliver: SliverGrid.count(
+                mainAxisSpacing: 20,
+                crossAxisCount: 4,
+                childAspectRatio: 0.7,
+                children: [
+                  ...room.others
+                      .map(
+                        (e) => RoomUserProfile(
+                          imageUrl: e.imageUrl,
+                          size: 66,
+                          name: e.givenName,
+                          isNew: Random().nextBool(),
+                        ),
+                      )
+                      .toList(),
+                ],
+              ),
+            ),
+            const SliverPadding(
+              padding: EdgeInsets.only(bottom: 30),
+            ),
           ],
         ),
+      ),
+      bottomSheet: Container(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 20,
+          vertical: 12,
+        ),
+        height: 70,
+        child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              GestureDetector(
+                onTap: () => Navigator.of(context).pop(),
+                child: Container(
+                  padding: EdgeInsets.symmetric(vertical: 6, horizontal: 16),
+                  decoration: BoxDecoration(
+                      color: Colors.grey[300],
+                      borderRadius: BorderRadius.circular(24)),
+                  child: const Text.rich(
+                    TextSpan(
+                      children: [
+                        TextSpan(
+                          text: '✌️',
+                          style: TextStyle(fontSize: 20),
+                        ),
+                        TextSpan(
+                          text: 'Leave quietly',
+                          style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.red,
+                              fontWeight: FontWeight.w600,
+                              letterSpacing: 1.8),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              Row(
+                children: [
+                  GestureDetector(
+                    onTap: () {},
+                    child: Container(
+                      padding: EdgeInsets.all(6),
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle, color: Colors.grey[300]),
+                      child: Icon(
+                        CupertinoIcons.add,
+                        size: 30,
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 16,
+                  ),
+                  GestureDetector(
+                    onTap: () {},
+                    child: Container(
+                      padding: EdgeInsets.all(6),
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle, color: Colors.grey[300]),
+                      child: Icon(
+                        CupertinoIcons.hand_raised,
+                        size: 30,
+                      ),
+                    ),
+                  )
+                ],
+              )
+            ]),
       ),
     );
   }
